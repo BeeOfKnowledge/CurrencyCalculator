@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args) {
         DOMxmlReader reader = new DOMxmlReader();
         reader.read("src/resources/eurofxref-daily.xml");
-        Calculator calc = new Calculator(reader.getCurrMap());
+        Calculator calc = new Calculator(reader.getCurrenciesMap());
         calc.start();
     }
 }

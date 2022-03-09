@@ -14,8 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DOMxmlReader {
-
-    private Map<String, BigDecimal> currMap = new HashMap<>();
+    private Map<String, BigDecimal> currenciesMap = new HashMap<>();
 
     public void read(String filepath) {
         System.out.println("Reading file of currencies...");
@@ -38,15 +37,15 @@ public class DOMxmlReader {
                 value = new BigDecimal(nodeList.item(i).getAttributes().getNamedItem("rate").getNodeValue());
                 currMap.put(curr, value);
             }
-            this.currMap = currMap;
+            this.currenciesMap = currMap;
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Great! File by " + date + " was successful read.");
+        System.out.println("Great! File by date " + date + " was successful read.");
     }
 
-    public Map<String, BigDecimal> getCurrMap() {
-        currMap.get("PLN");
-        return currMap;
+    public Map<String, BigDecimal> getCurrenciesMap() {
+        currenciesMap.get("PLN");
+        return currenciesMap;
     }
 }

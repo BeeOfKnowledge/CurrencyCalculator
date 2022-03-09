@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 public class Calculator {
-
     private Map<String, BigDecimal> currMap;
     private BigDecimal val;
     private String curr;
@@ -17,13 +16,12 @@ public class Calculator {
     public void start() {
         readAmount();
         readCurrency();
-
-        BigDecimal res = val.multiply(currMap.get(curr));
-        System.out.println("EUR to " + curr + " = " + res);
+        calculate();
+        sendOptions();
     }
 
     private void readAmount() {
-        System.out.println("Enter the amount in EUR:");
+        System.out.println("Enter amount in EUR:");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         try {
             val = new BigDecimal(bufferedReader.readLine());
@@ -34,7 +32,7 @@ public class Calculator {
     }
 
     private void readCurrency() {
-        System.out.println("Enter the tag of currency from this list: ");
+        System.out.println("Enter a tag of currency from this list: ");
         for (Map.Entry<String, BigDecimal> entry : currMap.entrySet()) {
             System.out.print(entry.getKey() + " ");
         }
@@ -44,7 +42,7 @@ public class Calculator {
         try {
             curr = bufferedReader.readLine().toUpperCase();
             if (!curr.matches("[a-zA-Z]+")) {
-                System.out.println("*** You should enter a value with tag! ***");
+                System.out.println("*** You should enter a tag! ***");
                 readCurrency();
             } else if (currMap.get(curr) == null) {
                 System.out.println("*** Tag is not correct! ***");
@@ -54,5 +52,27 @@ public class Calculator {
             e.printStackTrace();
             readCurrency();
         }
+    }
+
+    private void calculate() {
+        BigDecimal result = val.multiply(currMap.get(curr));
+        System.out.println("EUR to " + curr + " = " + result);
+    }
+
+    private void sendOptions() {
+        System.out.println("Would you like continue? 'y' - yes, 'n' - no");
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            String val = bufferedReader.readLine().toLowerCase();
+            if (val.equals("y") || val.equals("yes")) {
+                start();
+            } else if (!val.equals("n") && !val.equals("no")) {
+                System.out.println("*** You should enter only 'y' or 'n'! ***");
+                sendOptions();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
