@@ -17,11 +17,12 @@ public class DOMxmlReader {
     private Map<String, BigDecimal> currenciesMap = new HashMap<>();
 
     public void read(String filepath) {
-        System.out.println("Reading file of currencies...");
+        String date = "";
         File xmlFile = new File(filepath);
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
-        String date = "";
+
+        System.out.println("Reading file of currencies...");
         try {
             builder = factory.newDocumentBuilder();
             Document doc = builder.parse(xmlFile);
