@@ -45,7 +45,6 @@ public class DOMxmlReader {
     }
 
     public Map<String, BigDecimal> getCurrenciesMap() {
-        currenciesMap.get("PLN");
         return currenciesMap;
     }
 }
